@@ -219,6 +219,46 @@ st.markdown("""
         color: #252b36 !important;
     }
 
+
+    /* Override global paragraph color rules inside Streamlit buttons */
+    .stApp div.stButton > button,
+    .stApp div.stButton > button *,
+    .stApp div.stFormSubmitButton > button,
+    .stApp div.stFormSubmitButton > button *,
+    .stApp button[kind="primary"],
+    .stApp button[kind="primary"] * {
+        color: #ffffff !important;
+        -webkit-text-fill-color: #ffffff !important;
+    }
+
+    .stApp div.stButton > button,
+    .stApp div.stFormSubmitButton > button,
+    .stApp button[kind="primary"] {
+        background-color: #344054 !important;
+        border-color: #344054 !important;
+    }
+
+    .stApp div.stButton > button:hover,
+    .stApp div.stButton > button:hover *,
+    .stApp div.stFormSubmitButton > button:hover,
+    .stApp div.stFormSubmitButton > button:hover *,
+    .stApp button[kind="primary"]:hover,
+    .stApp button[kind="primary"]:hover * {
+        color: #ffffff !important;
+        -webkit-text-fill-color: #ffffff !important;
+        background-color: #263246 !important;
+        border-color: #263246 !important;
+    }
+
+    /* Secondary/download buttons have a white background, so use dark text */
+    .stApp div.stDownloadButton > button,
+    .stApp div.stDownloadButton > button * {
+        color: #344054 !important;
+        -webkit-text-fill-color: #344054 !important;
+        background-color: #ffffff !important;
+        border-color: #d0d5dd !important;
+    }
+
 </style>
 """, unsafe_allow_html=True)
 
