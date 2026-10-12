@@ -24,6 +24,43 @@ st.markdown("""
 
     .stApp {
         background: var(--page-bg);
+        color: var(--text-main) !important;
+    }
+
+    /* Force readable text even if Streamlit's config.toml sets a light text color. */
+    .stApp,
+    .stApp p,
+    .stApp label,
+    .stApp [data-testid="stMarkdownContainer"],
+    .stApp [data-testid="stMarkdownContainer"] p,
+    .stApp [data-testid="stCaptionContainer"],
+    .stApp [data-testid="stWidgetLabel"],
+    .stApp [data-testid="stWidgetLabel"] p,
+    .stApp .stText,
+    .stApp .stMarkdown,
+    [data-testid="stSidebar"],
+    [data-testid="stSidebar"] p,
+    [data-testid="stSidebar"] label,
+    [data-testid="stSidebar"] [data-testid="stMarkdownContainer"],
+    [data-testid="stSidebar"] [data-testid="stCaptionContainer"] {
+        color: #202938 !important;
+    }
+
+    .stApp input,
+    .stApp textarea,
+    .stApp [data-baseweb="select"] * {
+        color: #202938 !important;
+    }
+
+    .stApp input::placeholder,
+    .stApp textarea::placeholder {
+        color: #667085 !important;
+        opacity: 1 !important;
+    }
+
+    .stApp [data-testid="stSlider"] [data-testid="stTickBarMin"],
+    .stApp [data-testid="stSlider"] [data-testid="stTickBarMax"] {
+        color: #667085 !important;
     }
 
     .block-container {
