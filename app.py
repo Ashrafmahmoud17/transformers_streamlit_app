@@ -6,7 +6,7 @@ from models import (
 
 st.set_page_config(
     page_title="NLP Studio | Transformers",
-    page_icon="🧠",
+    page_icon="",
     layout="wide",
     initial_sidebar_state="expanded",
 )
@@ -24,17 +24,17 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 TASKS = {
-    "Text Summarization": "📝",
-    "Sentiment Analysis": "💬",
-    "Named Entity Recognition": "🔎",
-    "Question Answering": "❓",
-    "Text Generation": "✨",
-    "Translation": "🌍",
-    "Fill Mask": "🧩",
+    "Text Summarization": "",
+    "Sentiment Analysis": "",
+    "Named Entity Recognition": "",
+    "Question Answering": "",
+    "Text Generation": "",
+    "Translation": "",
+    "Fill Mask": "",
 }
 
 with st.sidebar:
-    st.markdown("## 🧠 NLP Studio")
+    st.markdown("##  NLP Studio")
     st.caption("Transformer models · Hugging Face")
     task = st.radio(
         "Choose a task",
@@ -54,7 +54,7 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 def run_button(label="Run model"):
-    return st.button(f"🚀 {label}", type="primary", use_container_width=True)
+    return st.button(f" {label}", type="primary", use_container_width=True)
 
 def show_error(error):
     st.error(f"Could not complete this task: {error}")
