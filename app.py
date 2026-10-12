@@ -259,6 +259,33 @@ st.markdown("""
         border-color: #d0d5dd !important;
     }
 
+    /* Make Variation text clearly visible */
+.stApp [data-testid="stMarkdownContainer"] *,
+.stApp [data-testid="stWidgetLabel"] *,
+.stApp label,
+.stApp p,
+.stApp span {
+    color: #202938 !important;
+    -webkit-text-fill-color: #202938 !important;
+}
+
+/* Ensure text inside input fields is visible */
+.stApp input,
+.stApp textarea,
+.stApp [data-baseweb="select"] * {
+    color: #202938 !important;
+    -webkit-text-fill-color: #202938 !important;
+}
+
+/* Keep buttons white on dark backgrounds */
+.stApp div.stButton > button,
+.stApp div.stButton > button *,
+.stApp div.stFormSubmitButton > button,
+.stApp div.stFormSubmitButton > button * {
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+}
+
 </style>
 """, unsafe_allow_html=True)
 
