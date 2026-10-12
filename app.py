@@ -1,61 +1,189 @@
 import streamlit as st
 from models import (
     summarize_text, analyze_sentiment, extract_entities, answer_question,
-    generate_text, translate_text, classify_zero_shot, fill_mask_text,
+    generate_text, translate_text, fill_mask_text,
 )
 
 st.set_page_config(
     page_title="NLP Studio | Transformers",
-    page_icon="🧠",
+    page_icon=None,
     layout="wide",
     initial_sidebar_state="expanded",
 )
 
 st.markdown("""
 <style>
-    .block-container {padding-top: 2rem; padding-bottom: 3rem; max-width: 1250px;}
-    .hero {padding: 1.6rem 1.8rem; border-radius: 18px; background: linear-gradient(120deg,#111827,#243b53); color: white; margin-bottom: 1.25rem;}
-    .hero h1 {margin: 0; font-size: 2.1rem;}
-    .hero p {margin: .45rem 0 0 0; color: #dbeafe;}
-    .metric-card {border: 1px solid rgba(128,128,128,.25); padding: 1rem 1.1rem; border-radius: 14px; min-height: 100px;}
-    .result-card {border: 1px solid rgba(128,128,128,.25); border-radius: 14px; padding: 1rem 1.2rem; margin: .5rem 0;}
-    div.stButton > button {border-radius: 10px; font-weight: 600; min-height: 2.8rem;}
+    :root {
+        --page-bg: #f7f8fa;
+        --surface: #ffffff;
+        --text-main: #202938;
+        --text-muted: #667085;
+        --border: #e1e5eb;
+        --accent: #344054;
+    }
+
+    .stApp {
+        background: var(--page-bg);
+    }
+
+    .block-container {
+        max-width: 1120px;
+        padding-top: 2rem;
+        padding-bottom: 3rem;
+    }
+
+    [data-testid="stSidebar"] {
+        background: #ffffff;
+        border-right: 1px solid var(--border);
+    }
+
+    [data-testid="stSidebar"] h2 {
+        color: var(--text-main);
+        font-size: 1.35rem;
+        font-weight: 650;
+        letter-spacing: -0.02em;
+    }
+
+    [data-testid="stSidebar"] [data-testid="stRadio"] label {
+        font-size: 0.95rem;
+    }
+
+    .hero {
+        background: #ffffff;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 1.5rem 1.6rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .hero h1 {
+        color: var(--text-main);
+        font-size: 2rem;
+        font-weight: 650;
+        letter-spacing: -0.035em;
+        line-height: 1.2;
+        margin: 0 0 0.55rem 0;
+    }
+
+    .hero p {
+        color: var(--text-muted);
+        font-size: 1rem;
+        line-height: 1.6;
+        margin: 0;
+    }
+
+    h2, h3 {
+        color: var(--text-main);
+        letter-spacing: -0.02em;
+    }
+
+    [data-testid="stTextArea"] textarea,
+    [data-testid="stTextInput"] input,
+    [data-testid="stSelectbox"] [data-baseweb="select"] {
+        background: #ffffff;
+        border-color: #d0d5dd;
+        border-radius: 6px;
+    }
+
+    div.stButton > button,
+    div.stDownloadButton > button {
+        border-radius: 6px;
+        min-height: 2.65rem;
+        font-weight: 550;
+        box-shadow: none;
+        transition: background-color 0.15s ease, border-color 0.15s ease;
+    }
+
+    div.stButton > button[kind="primary"] {
+        background: #344054;
+        border: 1px solid #344054;
+        color: #ffffff;
+    }
+
+    div.stButton > button[kind="primary"]:hover {
+        background: #202938;
+        border-color: #202938;
+    }
+
+    div.stDownloadButton > button {
+        background: #ffffff;
+        border: 1px solid #d0d5dd;
+        color: #344054;
+    }
+
+    [data-testid="stMetric"] {
+        background: #ffffff;
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        padding: 1rem;
+    }
+
+    [data-testid="stProgress"] > div {
+        border-radius: 4px;
+    }
+
+    .result-card {
+        background: #ffffff;
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        padding: 1rem 1.1rem;
+        margin: 0.5rem 0;
+        color: var(--text-main);
+    }
+
+    hr {
+        border-color: var(--border);
+    }
+
+    @media (max-width: 768px) {
+        .block-container {
+            padding-top: 1.25rem;
+            padding-bottom: 2rem;
+        }
+
+        .hero {
+            padding: 1.15rem;
+        }
+
+        .hero h1 {
+            font-size: 1.65rem;
+        }
+    }
 </style>
 """, unsafe_allow_html=True)
 
 TASKS = {
-    "Text Summarization": "📝",
-    "Sentiment Analysis": "💬",
-    "Named Entity Recognition": "🔎",
-    "Question Answering": "❓",
-    "Text Generation": "✨",
-    "Translation": "🌍",
-    "Zero-Shot Classification": "🏷️",
-    "Fill Mask": "🧩",
+    "Text Summarization": "",
+    "Sentiment Analysis": "",
+    "Named Entity Recognition": "",
+    "Question Answering": "",
+    "Text Generation": "",
+    "Translation": "",
+    "Fill Mask": "",
 }
 
 with st.sidebar:
-    st.markdown("## 🧠 NLP Studio")
-    st.caption("Transformer models · Hugging Face")
+    st.markdown("## NLP Studio")
+    st.caption("Natural language processing tools")
     task = st.radio(
         "Choose a task",
         list(TASKS.keys()),
-        format_func=lambda x: f"{TASKS[x]}  {x}",
+        format_func=lambda x: x,
     )
     st.divider()
     st.markdown("### About")
-    st.caption("A demo application for eight NLP tasks using pretrained Transformer models.")
+    st.caption("A demonstration of seven natural language processing tasks using pretrained models.")
     st.caption("Models load only when you run a task. First run may take a few minutes.")
 
 st.markdown(f"""
 <div class="hero">
-  <h1>{TASKS[task]} {task}</h1>
+  <h1>{task}</h1>
   <p>Explore NLP with pretrained Transformer models.</p>
 </div>
 """, unsafe_allow_html=True)
 
 def run_button(label="Run model"):
-    return st.button(f"🚀 {label}", type="primary", use_container_width=True)
+    return st.button(label, type="primary", use_container_width=True)
 
 def show_error(error):
     st.error(f"Could not complete this task: {error}")
@@ -79,9 +207,8 @@ if task == "Text Summarization":
                 try:
                     result = summarize_text(article.strip(), max_length=max_length, min_length=min_length)
                     st.subheader("Summary")
-                    st.markdown('<div class="result-card">', unsafe_allow_html=True)
-                    st.write(result)
-                    st.markdown("</div>", unsafe_allow_html=True)
+                    safe_result = str(result).replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace("\\n", "<br>")
+                    st.markdown(f'<div class="result-card">{safe_result}</div>', unsafe_allow_html=True)
                     st.download_button("Download summary", result, file_name="summary.txt", mime="text/plain")
                 except Exception as e:
                     show_error(e)
@@ -155,7 +282,7 @@ elif task == "Question Answering":
                         st.info("The model could not find a confident answer in the supplied context.")
                     else:
                         st.subheader("Answer")
-                        st.markdown(f'<div class="result-card">{answer}</div>', unsafe_allow_html=True)
+                        st.markdown('<div class="result-card">' + answer.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;") + '</div>', unsafe_allow_html=True)
                         st.metric("Confidence score", f"{float(result.get('score', 0)):.1%}")
                         st.caption("The score is a model estimate, not a guarantee that the answer is correct.")
                 except Exception as e:
@@ -181,9 +308,8 @@ elif task == "Text Generation":
                                             num_return_sequences=variations, temperature=temperature, top_p=top_p)
                     for i, output in enumerate(outputs, start=1):
                         st.markdown(f"**Variation {i}**")
-                        st.markdown('<div class="result-card">', unsafe_allow_html=True)
-                        st.write(output.get("generated_text", ""))
-                        st.markdown("</div>", unsafe_allow_html=True)
+                        safe_output = str(output.get("generated_text", "")).replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace("\\n", "<br>")
+                        st.markdown(f'<div class="result-card">{safe_output}</div>', unsafe_allow_html=True)
                     st.download_button("Download generated text", "\n\n".join(x.get("generated_text", "") for x in outputs),
                                        file_name="generated_text.txt", mime="text/plain")
                 except Exception as e:
@@ -206,33 +332,10 @@ elif task == "Translation":
             with st.spinner(f"Translating into {language}..."):
                 try:
                     result = translate_text(text.strip(), language_options[language])
-                    st.subheader(f"Translation · {language}")
-                    st.markdown('<div class="result-card">', unsafe_allow_html=True)
-                    st.write(result)
-                    st.markdown("</div>", unsafe_allow_html=True)
+                    st.subheader(f"Translation: {language}")
+                    safe_result = str(result).replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace("\\n", "<br>")
+                    st.markdown(f'<div class="result-card">{safe_result}</div>', unsafe_allow_html=True)
                     st.download_button("Download translation", result, file_name="translation.txt", mime="text/plain")
-                except Exception as e:
-                    show_error(e)
-
-elif task == "Zero-Shot Classification":
-    st.markdown("Enter a text and define candidate labels. No additional training is needed for your labels.")
-    text = st.text_area("Text to classify", height=150, placeholder="The stock market crashed today as inflation fears grip investors.")
-    labels_raw = st.text_input("Candidate labels (separate with commas)", value="finance, politics, sports, technology, health")
-    multi_label = st.checkbox("Allow multiple labels to be true", value=False)
-    if run_button("Classify text"):
-        labels = [x.strip() for x in labels_raw.split(",") if x.strip()]
-        if not text.strip():
-            st.warning("Please enter some text.")
-        elif len(labels) < 2:
-            st.warning("Enter at least two candidate labels, separated by commas.")
-        else:
-            with st.spinner("Classifying text..."):
-                try:
-                    result = classify_zero_shot(text.strip(), labels, multi_label=multi_label)
-                    st.subheader("Ranked labels")
-                    for label, score in zip(result["labels"], result["scores"]):
-                        st.write(f"**{label}** — {float(score):.1%}")
-                        st.progress(max(0.0, min(float(score), 1.0)))
                 except Exception as e:
                     show_error(e)
 
@@ -257,4 +360,4 @@ elif task == "Fill Mask":
                     show_error(e)
 
 st.divider()
-st.caption("Educational demo · Model outputs can be inaccurate. Review results before relying on them.")
+st.caption("Educational demonstration. Model outputs may be inaccurate; review results before relying on them.")
