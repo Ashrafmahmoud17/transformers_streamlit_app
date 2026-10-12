@@ -285,6 +285,32 @@ st.markdown("""
     color: #ffffff !important;
     -webkit-text-fill-color: #ffffff !important;
 }
+/* Force Streamlit metric variation text to be visible */
+.stApp [data-testid="stMetricDelta"],
+.stApp [data-testid="stMetricDelta"] *,
+.stApp [data-testid="stMetricDelta"] svg,
+.stApp [data-testid="stMetricDelta"] span,
+.stApp [data-testid="stMetricDelta"] p {
+    color: #475467 !important;
+    fill: #475467 !important;
+    -webkit-text-fill-color: #475467 !important;
+    opacity: 1 !important;
+}
+
+/* Override positive and negative variation colors */
+.stApp [data-testid="stMetricDelta"][data-testid],
+.stApp [data-testid="stMetricDelta"] svg path {
+    opacity: 1 !important;
+}
+
+/* Make metric labels and values readable */
+.stApp [data-testid="stMetricLabel"],
+.stApp [data-testid="stMetricLabel"] *,
+.stApp [data-testid="stMetricValue"],
+.stApp [data-testid="stMetricValue"] * {
+    color: #202938 !important;
+    -webkit-text-fill-color: #202938 !important;
+}
 
 </style>
 """, unsafe_allow_html=True)
