@@ -186,6 +186,39 @@ st.markdown("""
             font-size: 1.65rem;
         }
     }
+
+    /* Button label colors: keep text readable against each button background */
+    .stButton > button,
+    .stFormSubmitButton > button,
+    button[kind="primary"] {
+        background-color: #344054 !important;
+        color: #ffffff !important;
+        border: 1px solid #344054 !important;
+        font-weight: 600 !important;
+    }
+
+    .stButton > button:hover,
+    .stFormSubmitButton > button:hover,
+    button[kind="primary"]:hover {
+        background-color: #263246 !important;
+        color: #ffffff !important;
+        border-color: #263246 !important;
+    }
+
+    .stButton > button:focus,
+    .stFormSubmitButton > button:focus,
+    button[kind="primary"]:focus {
+        color: #ffffff !important;
+        outline-color: #344054 !important;
+    }
+
+    /* Sidebar radio/select controls should use readable dark labels */
+    section[data-testid="stSidebar"] label,
+    section[data-testid="stSidebar"] p,
+    section[data-testid="stSidebar"] span {
+        color: #252b36 !important;
+    }
+
 </style>
 """, unsafe_allow_html=True)
 
